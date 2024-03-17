@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<!-- External CSS -->
+<link rel="stylesheet" href="./css/style.css">
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+
+<body class="bg-light">
+	<!-- Navbar start -->
+	<nav
+		class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top border border-secondary">
+		<a class="navbar-brand ml-5" th:href="@{/home}">
+			<h3>ENGLISH 365</h3>
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse mr-2" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto">
+				<h3 class=" text-light mr-5"
+					th:text="'Welcome' + ', ' + ${userDetails.name} + ' !'"></h3>
+
+				<li class="nav-item"><a th:href="@{/logout}"
+					class="btn btn-small font-weight-bold rounded bg-secondary text-primary">LOGOUT</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- Navbar end -->
+
+	<!-- Main start -->
+	<div class="row">
+
+		<div class="card m-5 shadow-lg " style="max-width: 18rem;">
+			<h4 class="card-header text-center bg-primary text-light ">DAILY
+				VOCAB</h4>
+			<div class="card-body text-center border bg-transparent">
+				<p class="card-text">Expand your vocabulary effortlessly with
+					our daily dose of carefully curated quotes of famous personalities.</p>
+				<hr>
+				<a th:href="@{/dailyVocab}"
+					class="btn btn-block btn-outline-primary rounded-pill font-weight-bold">ENTER</a>
+			</div>
+		</div>
+		<div class="card m-5 shadow-lg " style="max-width: 18rem;">
+			<h4 class="card-header text-center bg-primary text-light ">IMAGE
+				SCAN</h4>
+			<div class="card-body text-center border bg-transparent">
+				<p class="card-text">Discover the power of visual learning! Use
+					our advanced image scanning feature to identify words from images.</p>
+				<hr>
+				<a th:href="@{/imageTranslate}"
+					class="btn btn-block btn-outline-primary rounded-pill font-weight-bold">ENTER</a>
+			</div>
+		</div>
+
+		<div class="card m-5 shadow-lg " style="max-width: 18rem;">
+			<h4 class="card-header text-center bg-primary text-light ">TEXT
+				TO SPEECH</h4>
+			<div class="card-body text-center border bg-transparent">
+				<p class="card-text">Transform written words into spoken
+					language. Listen to articles, stories, or any text on the website.</p>
+				<hr>
+				<a th:href="@{/tts}"
+					class="btn btn-block btn-outline-primary rounded-pill font-weight-bold">ENTER</a>
+			</div>
+		</div>
+
+		<div class="card m-5 shadow-lg " style="max-width: 18rem;">
+			<h4 class="card-header text-center bg-primary text-light ">DICTIONARY</h4>
+			<div class="card-body text-center border bg-transparent">
+				<p class="card-text">Unleash the power of knowledge with our
+					comprehensive dictionary. Instantly find definitions of words.</p>
+				<hr>
+				<a th:href="@{/dictionary}"
+					class="btn btn-block btn-outline-primary rounded-pill font-weight-bold">ENTER</a>
+			</div>
+		</div>
+
+		<div class="card m-5 shadow-lg " style="max-width: 18rem;">
+			<h4 class="card-header text-center bg-primary text-light ">CHATROOM</h4>
+			<div class="card-body text-center border bg-transparent">
+				<p class="card-text">Connect with like-minded individuals in our
+					vibrant chatroom community to learn and exchange ideas.</p>
+				<hr>
+				<a th:href="@{/chat(username=${userDetails.name})}"
+					class="btn btn-block btn-outline-primary rounded-pill font-weight-bold">ENTER</a>
+			</div>
+		</div>
+
+		<div class="card m-5 shadow-lg " style="max-width: 18rem;">
+			<h4 class="card-header text-center bg-primary text-light ">WORD
+				KEEPER</h4>
+			<div class="card-body text-center border bg-transparent">
+				<p class="card-text">Save and recall words and their meanings
+					easily to enhance your vocabulary journey.</p>
+				<hr>
+				<a th:href="@{/wordkeeper}"
+					class="btn btn-block btn-outline-primary rounded-pill font-weight-bold">ENTER</a>
+			</div>
+		</div>
+
+		<div class="card m-5 shadow-lg " style="max-width: 18rem;">
+			<h4 class="card-header text-center bg-primary text-light ">QUICK
+				TRIVIA</h4>
+			<div class="card-body text-center border bg-transparent">
+				<p class="card-text">Explore Trivia effortlessly, absorbing
+					interesting facts to enhance your knowledge journey with ease.</p>
+				<hr>
+				<a th:href="@{/quicktrivia}"
+					class="btn btn-block btn-outline-primary rounded-pill font-weight-bold">ENTER</a>
+			</div>
+		</div>
+
+
+		<div class="card m-5 shadow-lg " style="max-width: 18rem;">
+			<h4 class="card-header text-center bg-primary text-light ">HUMOUR
+				HUB</h4>
+			<div class="card-body text-center border bg-transparent">
+				<p class="card-text">Boost your English learning where laughter
+					meets language, making the journey enjoyable and educational.</p>
+				<hr>
+				<a th:href="@{/humourhub}"
+					class="btn btn-block btn-outline-primary rounded-pill font-weight-bold">ENTER</a>
+			</div>
+		</div>
+
+		<!--
+		<div class="card m-5 shadow-lg " style="max-width: 18rem;">
+			<h4 class="card-header text-center bg-primary text-light ">MY
+				PROFILE</h4>
+			<div class="card-body text-center border bg-transparent">
+				<p class="card-text">Some quick example text to build on the
+					card title and make up the bulk of the card's content.</p>
+				<hr>
+				<a th:href="@{/profile}"
+					class="btn btn-block btn-outline-primary rounded-pill font-weight-bold">ENTER</a>
+			</div>
+		</div>
+-->
+
+	</div>
+	<!-- Main end -->
+
+	<!-- bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="./js/action.js"></script>
+
+
+
+</body>
+
+</html>

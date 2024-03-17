@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- External CSS -->
+<link rel="stylesheet" href="./css/style.css">
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+
+<title>Quick Trivia</title>
+</head>
+
+<body class="bg-light">
+	<!-- Navbar start -->
+	<nav
+		class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top border border-secondary">
+		<a class="navbar-brand ml-5" href="#">
+			<h3>ENGLISH 365</h3>
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse mr-2" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item mx-3"><a th:href="@{/dashboard}"
+					class="btn btn-small font-weight-bold rounded bg-secondary text-primary">DASHBOARD</a></li>
+				<li class="nav-item"><a th:href="@{/logout}"
+					class="btn btn-small font-weight-bold rounded bg-secondary text-dark">LOGOUT</a></li>
+
+			</ul>
+		</div>
+	</nav>
+	<!-- Navbar end -->
+
+	<!-- Main start -->
+	<div class="container mt-5">
+		<div class="row">
+			<div class="col-12">
+
+				<form th:action="@{/starttrivia}">
+					<div class="card border-primary col-5 m-auto ">
+						<div class="card-body text-primary">
+							<h5 class="card-title">
+
+								<div th:if="${message}" class="alert alert-success text-center"
+									th:text="${message}"></div>
+
+								Select Difficulty: <select class="custom-select my-3 "
+									name="difficulty">
+									<option value="easy">Easy</option>
+									<option value="medium">Medium</option>
+									<option value="hard">Hard</option>
+								</select> <br> <br> Select Category: <select
+									class="custom-select my-3 " name="category">
+									<option value="general_knowledge">General Knowledge</option>
+									<option value="history">History</option>
+									<option value="geography">Geography</option>
+									<option value="science">Science</option>
+									<option value="society_and_culture">Society and
+										Culture</option>
+									<option value="food_and_drink">Food and drinks</option>
+								</select>
+								</h5>
+							</div>
+							<div
+								class="card-footer bg-transparent border-primary text-center">
+								<input type=submit class="btn btn-success btn-block my-3"
+									value="Start Quiz">
+							</div>
+						</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

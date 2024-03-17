@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- External CSS -->
+<link rel="stylesheet" href="./css/style.css">
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+	<!-- Navbar start -->
+	<nav
+		class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top border border-secondary">
+		<a class="navbar-brand ml-5" href="#">
+			<h3>ENGLISH 365</h3>
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse mr-2" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item mx-3"><a th:href="@{/dashboard}"
+					class="btn btn-small font-weight-bold rounded bg-secondary text-primary">DASHBOARD</a></li>
+				<li class="nav-item"><a th:href="@{/logout}"
+					class="btn btn-small font-weight-bold rounded bg-secondary text-dark">LOGOUT</a></li>
+
+			</ul>
+		</div>
+	</nav>
+	<!-- Navbar end -->
+
+	<!-- Main start -->
+	<div class="container mt-5">
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<h1 class="text-center">DICTIONARY</h1>
+				<hr>
+				<form id="dictionary-form" th:action="@{/fetch-definition}"
+					method="get" class="mb-4">
+					<div class="form-group">
+						<label for="word"><h5>Enter a word:</h5></label> <input
+							type="text" id="word" name="word" required class="form-control">
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+				<div id="result">
+					<!-- Check if 'definition' is present and not null -->
+					<div th:if="${definition != null}" class="alert alert-success">
+						<p th:text="${word} + ' - ' + ${definition}"></p>
+					</div>
+
+					<!-- Check if 'wordNotFound' is present in the model -->
+					<div th:if="${wordNotFound}" class="alert alert-danger">Word
+						not found!</div>
+				</div>
+				<hr>
+				<p>Welcome to our dictionary service, where words come to life!
+					Our comprehensive dictionary provides easy and simple definitions
+					to enhance your understanding of the English language.</p>
+
+				<p>Whether you're a student, a language enthusiast, or someone
+					seeking precise word meanings, our user-friendly interface makes
+					exploring the vast world of vocabulary a delightful experience.
+					Discover a wealth of knowledge at your fingertips. From common
+					words to rare gems, our dictionary covers a wide spectrum of terms,
+					ensuring you have access to accurate and reliable information.</p>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

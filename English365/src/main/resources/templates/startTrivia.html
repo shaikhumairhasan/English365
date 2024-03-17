@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <title>Quick Trivia</title>
+</head>
+
+<body class="bg-dark">
+    <!-- Navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top border border-secondary">
+        <a class="navbar-brand ml-5" href="#">
+            <h3>ENGLISH 365</h3>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse mr-2" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-3"><a th:href="@{/dashboard}"
+                        class="btn btn-small font-weight-bold rounded bg-secondary text-primary">DASHBOARD</a></li>
+                <li class="nav-item"><a th:href="@{/logout}"
+                        class="btn btn-small font-weight-bold rounded bg-secondary text-dark">LOGOUT</a></li>
+
+            </ul>
+        </div>
+    </nav>
+    <!-- Navbar end -->
+
+    <!-- Main start -->
+    <div class="container mt-5 col-5">
+        <div id="quiz-container" class="card p-3">
+            <div class="card-body text-center">
+                <h4 id="question" class="card-title"></h4><hr>
+                <div id="options" class="mt-4"></div>
+                <h3 id="quiz-completed" class="mt-3 d-none">Quiz Completed!</h3>
+                <h4 id="score" class="my-3 d-none"></h4>
+                <hr>
+                <button id="next-btn" class="btn btn-primary mt-3">Next Question</button>
+                
+                <a th:href="@{/quicktrivia}" id="replay-btn" class="btn btn-primary btn-lg rounded my-3 d-none">Replay Quiz</a>
+  
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Extracting parameters from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const difficulty = urlParams.get('difficulty');
+            const category = urlParams.get('category');
+
+            // Constructing the API URL with parameters	
+        	
+            const apiUrl = `https://the-trivia-api.com/v2/questions?difficulties=${difficulty}&categories=${category}`;
+            let currentQuestionIndex = 0;
+            let userAnswer = null;
+            let score = 0;
+            let questions = [];
+
+            const nextButton = document.getElementById('next-btn');
+            const quizCompleted = document.getElementById('quiz-completed');
+            const scoreDisplay = document.getElementById('score');
+            const quizContainer = document.getElementById('quiz-container');
+
+            nextButton.addEventListener('click', () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    displayQuestion(questions[currentQuestionIndex]);
+                    nextButton.disabled = true;
+                    userAnswer = null;
+                } else {
+                    // Quiz completed
+                    displayScore();
+                }
+            });
+            
+         // Function to display the score
+            function displayScore() {
+                // Hide the quiz container
+                question.style.display = 'none';
+                options.style.display = 'none';
+                nextButton.style.display = 'none';
+                
+
+                // Display the score and quiz completion message
+                quizCompleted.classList.remove('d-none');
+                scoreDisplay.textContent = 'Your Score: ' + score + '/10';
+                scoreDisplay.classList.remove('d-none');
+                document.getElementById('replay-btn').classList.remove('d-none');
+            }
+
+            // Fetch data from the API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    questions = data;
+                    // Initialize the quiz with the first question
+                    displayQuestion(questions[currentQuestionIndex]);
+                });
+
+            // Display the question and options
+            function displayQuestion(question) {
+                const questionElement = document.getElementById('question');
+                const optionsElement = document.getElementById('options');
+
+                // Clear previous question and options
+                questionElement.textContent = `[${currentQuestionIndex + 1}] ${question.question.text}`;
+                optionsElement.innerHTML = '';
+
+                // Display options
+                question.incorrectAnswers.forEach((option, index) => {
+                    const optionButton = createOptionButton(option, false);
+                    optionButton.classList.add('btn-lg', 'btn-block', 'my-3', 'text-primary', 'font-weight-bolder');
+                    optionsElement.appendChild(optionButton);
+                });
+
+                // Add the correct answer randomly among the options
+                const correctOptionIndex = Math.floor(Math.random() * (question.incorrectAnswers.length + 1));
+                const correctOption = question.correctAnswer;
+                const correctOptionButton = createOptionButton(correctOption, true);
+                correctOptionButton.classList.add('btn-lg', 'btn-block', 'my-3', 'text-primary', 'font-weight-bolder');
+                optionsElement.insertBefore(correctOptionButton, optionsElement.children[correctOptionIndex]);
+
+                // Add event listeners to option buttons
+                const optionButtons = document.querySelectorAll('.option-btn');
+                optionButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        userAnswer = button.textContent;
+                        if (userAnswer === correctOption) {
+                            score++;
+                        }
+                        checkAnswer(userAnswer, correctOption);
+                        nextButton.disabled = false;
+                    });
+                });
+
+                // Disable next button initially
+                nextButton.disabled = true;
+            }
+
+            // Create option button with specified color
+            function createOptionButton(option, isCorrect) {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('btn', 'btn-outline-secondary', 'btn-block', 'my-3', 'option-btn');
+                if (isCorrect) {
+                    button.dataset.correct = true;
+                }
+                return button;
+            }
+
+            // Check if the selected answer is correct and update UI
+            function checkAnswer(userAnswer, correctAnswer) {
+                const optionButtons = document.querySelectorAll('.option-btn');
+                optionButtons.forEach(button => {
+                    if (button.textContent === userAnswer) {
+                        button.classList.add('bg-danger', 'text-light');
+                    }
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('bg-success', 'text-light');
+                        button.classList.remove('bg-danger');
+                    }
+                    button.disabled = true;
+                });
+            }
+
+       
+        });
+    </script>
+    <!-- Main end -->
+
+</body>
+
+</html>
