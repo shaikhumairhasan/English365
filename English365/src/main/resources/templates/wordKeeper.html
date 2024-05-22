@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- External CSS -->
+<link rel="stylesheet" href="./css/style.css">
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+
+<!--bootstrap icons css link-->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+</head>
+
+<body class="bg-light">
+	<!-- Navbar start -->
+	<nav
+		class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top border border-secondary">
+		<a class="navbar-brand ml-5" href="#">
+			<h3>ENGLISH 365</h3>
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse mr-2" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item mx-3"><a th:href="@{/dashboard}"
+					class="btn btn-small font-weight-bold rounded bg-secondary text-primary">DASHBOARD</a></li>
+				<li class="nav-item"><a th:href="@{/logout}"
+					class="btn btn-small font-weight-bold rounded bg-secondary text-dark">LOGOUT</a></li>
+
+			</ul>
+		</div>
+	</nav>
+	<!-- Navbar end -->
+
+	<!-- Main start -->
+	<div class="container mt-3 mx-auto">
+		<div class="row">
+			<div class="col-12">
+				<h1 class="text-center text-primary mb-5">WORD KEEPER</h1>
+
+				<form id="dictionary-form" th:action="@{/saveWord}"
+					method="post" class="mb-4 text-center">
+					<div class="form-row align-items-center justify-content-center">
+
+						<div>
+							<label for="word" class="text-primary">ENTER A WORD :</label>
+						</div>
+						<div class="mr-5">
+							<input class="ml-1 form-control d-inline-block" type="text"
+								id="word" name="word" required="required">
+						</div>
+
+						<div>
+							<label for="definition" class="text-primary">ENTER ITS
+								MEANING :</label>
+						</div>
+						<div class="mr-5">
+							<input class="ml-1 form-control" type="text" id="definition"
+								name="definition" required="required">
+						</div>
+						<div>
+							<button type="submit" class="btn btn-primary rounded-pill">Submit</button>
+						</div>
+					</div>
+				</form>
+
+				<div id="result" class="col-4 mx-auto">
+					<div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+					<div th:if="${messageRed}" class="alert alert-danger" th:text="${messageRed}"></div>
+				</div>
+
+				<hr>
+				<table class="table text-center table-bordered mt-4 table-dark font-weight-bolder">
+					<thead class="bg-primary">
+						<tr>
+							<th scope="col">Sr. No.</th>
+							<th scope="col">WORD</th>
+							<th scope="col">MEANING</th>
+							<th scope="col">DELETE</th>
+						</tr>
+					</thead>
+					<tbody id="table_body">
+						<tr th:each="wd, iteration : ${wordDefinitions}">
+							<td th:text="${iteration.index + 1}"></td>
+							<td th:text="${wd.word}"></td>
+							<td th:text="${wd.definition}"></td>
+							<td><a th:href="@{'/deleteword/' + ${wd.id}}" onclick="confirm('Are you sure you want to delete this word?')"><i class="bi bi-trash-fill" style="color: red"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+
+
+
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+</html>

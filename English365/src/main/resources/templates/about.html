@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+
+<body class="bg-light">
+    <!-- Navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <a class="navbar-brand ml-5" th:href="@{/home}">
+            <h3>ENGLISH 365</h3>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                
+                <li class="nav-item active">
+                    <a class="nav-link h5 pr-4" th:href="@{/login}">Login</a>
+                </li>
+				
+				<li class="nav-item active">
+                    <a class="nav-link h5" th:href="@{/home}">Home</a>
+                </li>
+                
+            </ul>
+        </div>
+    </nav>
+    <!-- Navbar end -->
+
+    <!-- Main start -->
+    <div class="container">
+		<div class="row justify-content-center mt-4">
+			<div class="col-auto mt-5 p-5">
+   			
+            <h2 class="pb-3 text-info ">ENGLISH 365</h2>
+            <h5 class="pb-3"><i>"ENGLISH 365" is a web application that aims to cater the needs of the English language learners. 
+            It provides various features that helps in learning the language. 
+            <br><br>
+            This project is created by <b>Shaikh Umairhasan Abdul Hakeem</b>. </i></h5>
+			
+			
+    		</div>
+		</div>
+	</div>
+    <!-- Main end -->
+
+    <!-- bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

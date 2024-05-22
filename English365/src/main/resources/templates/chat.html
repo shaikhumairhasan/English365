@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat Room</title>
+
+<!-- Include Bootstrap CSS -->
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="bg-light">
+
+	<div id="chat-room" class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-10">
+				<div class="card">
+					<div class="card-header bg-primary text-light">
+						<h3 id="name-title" class="m-0"></h3>
+					</div>
+					<div class="card-body">
+						<div class="input-group">
+							<input type="text" placeholder="Enter your message"
+								id="message-value" autofocus class="form-control">
+							<div class="input-group-append">
+								<button class="btn btn-primary" id="send-btn">Send</button>
+								<button class="btn btn-success ml-2" id="logout">Exit</button>
+							</div>
+						</div>
+						<hr>
+						<div class="table-responsive mt-3">
+							<table id="message-container-table" class="table table-striped">
+								<!-- Your chat messages will appear here -->
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Include jQuery and Bootstrap JS -->
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Include SockJS and Stomp JS -->
+	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
+	<!-- Include your custom script -->
+	<script src="./js/script.js"></script>
+</body>
+</html>
