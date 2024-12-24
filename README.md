@@ -1,5 +1,20 @@
 # English365
 
+**English365** is a comprehensive web application designed to enhance your English language skills through a variety of interactive tools and resources.
+
+## Features
+
+- **Daily Vocabulary**: Expand your lexicon with new words every day.  
+- **Image Scan**: Extract and learn text from images.  
+- **Text to Speech**: Convert written text into spoken words to improve pronunciation.  
+- **Dictionary**: Access definitions, synonyms, and antonyms for a wide range of words.  
+- **Chatroom**: Engage in conversations to practice English in real-time.  
+- **Word Keeper**: Save and review words you've learned.  
+- **Quick Trivia**: Test your knowledge with fun quizzes.  
+- **Humour Hub**: Enjoy jokes and humorous content to make learning enjoyable.  
+
+
+
 ## Screenshots of the project :
 
 +  **HOMEPAGE**
